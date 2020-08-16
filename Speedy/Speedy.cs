@@ -62,6 +62,7 @@ namespace Speedy
                 addressOnRow.FullAddress = row.mapUIFields.uiClientInfoAddress;
                 addressOnRow.SpeedyType = row.type;
                 var addressJson = row.address.data;
+                var locality = row.address.locality;
                 addressOnRow.IsOffice = addressJson.officeToggle;
                 addressOnRow.Country = addressJson.countryName;
                 addressOnRow.Neighborhood = addressJson.quarterName;
@@ -71,10 +72,13 @@ namespace Speedy
                 addressOnRow.Latitude = addressJson.x;
                 addressOnRow.Longitude = addressJson.y;
                 addressOnRow.BlockNumber = addressJson.blockNo;
-                addressOnRow.Municipality = row.address.locality.municipality.value;
-                addressOnRow.Region = row.address.locality.region.value;
-                addressOnRow.PhoneCode = row.address.locality.phoneCode;
-                addressOnRow.FullRegion = row.address.locality.details.value;
+                if (locality != null)
+                {
+                    addressOnRow.Municipality = row.address.locality.municipality.value;
+                    addressOnRow.Region = row.address.locality.region.value;
+                    addressOnRow.PhoneCode = row.address.locality.phoneCode;
+                    addressOnRow.FullRegion = row.address.locality.details.value;
+                }                
                 addresses.Add(addressOnRow);
             }
             return addresses;
